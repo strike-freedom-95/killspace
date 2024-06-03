@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ship Unlock
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -11,9 +13,9 @@ TagManager:
   - Post Processing
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player Ship
+  - Base Ship
+  - Enemy Ship
   - 
   - 
   - 
@@ -40,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 871336035
     locked: 0
