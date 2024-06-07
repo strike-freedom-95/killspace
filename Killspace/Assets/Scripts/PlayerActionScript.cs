@@ -30,6 +30,7 @@ public class PlayerActionScript : MonoBehaviour
                 if (!gun.isEmitting)
                 {
                     gun.Play();
+                    GetComponent<CinemachineImpulseSource>().GenerateImpulse();
                 }
             }
         }
@@ -74,7 +75,7 @@ public class PlayerActionScript : MonoBehaviour
 
     private void GenerateSpeedEffect()
     {
-        if (GetComponent<Rigidbody>().velocity.magnitude > 40 && !speedEffect.isEmitting)
+        if (GetComponent<Rigidbody>().velocity.magnitude > 45 && !speedEffect.isEmitting)
         {
             speedEffect.Play();
         }

@@ -21,6 +21,8 @@ public class PlayerCollisionScript : MonoBehaviour
         if(isTakeOff)
         {
             Instantiate(explosionFX, transform.position, Quaternion.identity);
+            FindObjectOfType<UIHandler>().ShowGameOverWindow();
+            FindObjectOfType<SceneHandler>().ResetGame(3f);
             Destroy(gameObject);
         }
     }

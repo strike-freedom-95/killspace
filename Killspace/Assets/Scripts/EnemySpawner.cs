@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     GameObject player;
 
     [SerializeField] GameObject enemy;
+    [SerializeField] int enemyLimit = 5;
 
     private void Start()
     {
@@ -23,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
         while(player != null)
         {
             yield return new WaitForSeconds(Random.Range(2, 7));
-            if(GameObject.FindGameObjectsWithTag("Enemy").Length < 5)
+            if(GameObject.FindGameObjectsWithTag("Enemy").Length < enemyLimit)
             {
                 Instantiate(enemy,
                 new Vector3(Random.Range(-200, 200),
