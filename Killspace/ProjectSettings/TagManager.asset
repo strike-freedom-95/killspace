@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ship Unlock
   - Enemy
+  - Laser
+  - Playable
+  - Spawner
+  - Mission
   layers:
   - Default
   - TransparentFX
@@ -16,10 +20,10 @@ TagManager:
   - Player Ship
   - Base Ship
   - Enemy Ship
-  - 
-  - 
-  - 
-  - 
+  - Player Laser
+  - Character
+  - Enemy Laser
+  - Shield
   - 
   - 
   - 
