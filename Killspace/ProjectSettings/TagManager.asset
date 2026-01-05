@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Asteroid
+  - Enemy
+  - Game Music
+  - Boundary
+  - Shield
+  - Mine
+  - Laser
+  - Transistion
+  - Human
   layers:
   - Default
   - TransparentFX
@@ -14,9 +22,9 @@ TagManager:
   - UI
   - Boundaries
   - Asteroids
-  - 
-  - 
-  - 
+  - Enemies
+  - Mine
+  - Player
   - 
   - 
   - 
@@ -39,6 +47,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Space
+    uniqueID: 596595423
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -47,4 +58,10 @@ TagManager:
     locked: 0
   - name: Sprite
     uniqueID: 693158859
+    locked: 0
+  - name: Mugshot
+    uniqueID: 3289742727
+    locked: 0
+  - name: UI
+    uniqueID: 748942413
     locked: 0
