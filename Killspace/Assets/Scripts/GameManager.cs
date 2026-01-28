@@ -10,8 +10,11 @@ public class GameManager : MonoBehaviour
     int xpForNextLevel;
     int score = 0;
 
-    [SerializeField] TextMeshProUGUI xpCountertext;
-    [SerializeField] TextMeshProUGUI lvlCounterText;
+    public bool isCrateReset = false;
+
+    // [SerializeField] TextMeshProUGUI xpCountertext;
+    // [SerializeField] TextMeshProUGUI lvlCounterText;
+    // [SerializeField] GameObject[] playerLives;
 
     private void Awake()
     {
@@ -21,10 +24,45 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        FindObjectOfType<ScoreKeeper>().UpdateXPUI(playerXP, xpForNextLevel);
+        FindObjectOfType<ScoreKeeper>().UpdateLevelUI(playerLvl);
+        FindObjectOfType<ScoreKeeper>().UpdateLivesCount();
+    }
+
+    /*private void SetLives()
+    {
+        foreach (var child in playerLives)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }*/
+
+    public void UpdateLivesCount()
+    {
+        /*int currentLife = DataHandlerScript.instance.livesLeft;
+        foreach(var child in playerLives)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        for(int i = 0; i < playerLives.Length; i++)
+        {
+            if(i < currentLife)
+            {
+                playerLives[i].SetActive(true);
+            }
+        }*/
+
+        FindObjectOfType<ScoreKeeper>().UpdateLivesCount();
+    }
+
     public void IncreaseXP(int xp)
     {
         playerXP += xp;
-        xpCountertext.text = playerXP.ToString();
+        // xpCountertext.text = playerXP.ToString() + " / " + xpForNextLevel.ToString();
+        FindObjectOfType<ScoreKeeper>().UpdateXPUI(playerXP, xpForNextLevel);
 
         if (playerXP > xpForNextLevel) 
         {
@@ -36,7 +74,8 @@ public class GameManager : MonoBehaviour
     public void IncreaseLvl() 
     {
         playerLvl++;
-        lvlCounterText.text = playerLvl.ToString();
+        // lvlCounterText.text =  "Lvl " + playerLvl.ToString();
+        FindObjectOfType<ScoreKeeper>().UpdateLevelUI(playerLvl);
     }
 
     public void ResetScore()
@@ -44,9 +83,14 @@ public class GameManager : MonoBehaviour
         playerXP = 0;
         playerLvl = 1;
         xpForNextLevel = 50;
+        score = 0;
 
-        xpCountertext.text = playerXP.ToString();
-        lvlCounterText.text = playerLvl.ToString();
+        // xpCountertext.text = playerXP.ToString();
+        // lvlCounterText.text = playerLvl.ToString();
+        FindObjectOfType<ScoreKeeper>().UpdateXPUI(playerXP, xpForNextLevel);
+        FindObjectOfType<ScoreKeeper>().UpdateLevelUI(playerLvl);
+
+        FindObjectOfType<ScoreUIScript>().UpdateScoreText(score);
     }
 
     public int GetCurrentLevel()
@@ -56,12 +100,32 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseScore(int newScore)
     {
-        score += newScore;
+        if(DataHandlerScript.instance.diffLevel > 0)
+        {
+            score += (newScore * DataHandlerScript.instance.diffLevel);
+        }
+        else
+        {
+            score += newScore;
+        }
+        
         FindObjectOfType<ScoreUIScript>().UpdateScoreText(score);
     }
 
     public int GetCurrentScore()
     {
         return score;
+    }
+
+    public void RelaxCrateSpawning()
+    {
+        StartCoroutine(ResetCrateSpawnTime((DataHandlerScript.instance.diffLevel + 1) * Random.Range(3, 6)));
+    }
+
+    IEnumerator ResetCrateSpawnTime(float delay)
+    {
+        isCrateReset = true;
+        yield return new WaitForSeconds(delay);
+        isCrateReset = false;
     }
 }

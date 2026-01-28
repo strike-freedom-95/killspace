@@ -8,6 +8,7 @@ public class SceneHandler : MonoBehaviour
     [SerializeField] GameObject transistion;
 
     const string TRANSITION_BOOL = "isSceneExit";
+    const string TRANSITION_TAG = "Transistion";
 
     private void Awake()
     {
@@ -40,7 +41,7 @@ public class SceneHandler : MonoBehaviour
 
     public void CreateTransition(bool state)
     {
-        foreach(var effect in GameObject.FindGameObjectsWithTag("Transistion"))
+        foreach(var effect in GameObject.FindGameObjectsWithTag(TRANSITION_TAG))
         {
             Destroy(effect);
         }
@@ -57,6 +58,11 @@ public class SceneHandler : MonoBehaviour
     public void StartGame()
     {
         // FindObjectOfType<MusicScript>().PlayMusic();
-        StartCoroutine(ChangeSceneAfterDelay(1, 2));
+        StartCoroutine(ChangeSceneAfterDelay(1, 3));
+    }
+
+    public int GetCurrentSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
     }
 }

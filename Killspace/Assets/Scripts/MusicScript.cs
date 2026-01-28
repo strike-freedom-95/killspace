@@ -6,6 +6,9 @@ public class MusicScript : MonoBehaviour
 {
     [SerializeField] float fadeDuration = 1.5f;
 
+    [SerializeField] AudioClip gameMusic;
+    [SerializeField] AudioClip menuMusic;
+
     AudioSource musicSource;
     Coroutine fadeRoutine;
 
@@ -44,6 +47,11 @@ public class MusicScript : MonoBehaviour
 
     IEnumerator FadeRoutine(float targetVolume, bool playIfNeeded)
     {
+        if (FindObjectOfType<SceneHandler>().GetCurrentSceneIndex() == 0)
+            musicSource.clip = menuMusic;
+        else
+            musicSource.clip = gameMusic;
+
         if (playIfNeeded && !musicSource.isPlaying)
             musicSource.Play();
 

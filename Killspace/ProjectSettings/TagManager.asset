@@ -13,6 +13,8 @@ TagManager:
   - Laser
   - Transistion
   - Human
+  - Crate
+  - Notification
   layers:
   - Default
   - TransparentFX

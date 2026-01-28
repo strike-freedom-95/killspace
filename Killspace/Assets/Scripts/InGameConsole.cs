@@ -37,6 +37,11 @@ public class InGameConsole : MonoBehaviour
         }
     }
 
+    public void OnShowDebugPressed()
+    {
+        showConsole = !showConsole;
+    }
+
     void OnGUI()
     {
         if (!showConsole) return;
